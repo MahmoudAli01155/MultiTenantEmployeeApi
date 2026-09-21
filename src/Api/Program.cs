@@ -1,9 +1,11 @@
 using Api.Middleware;
+using Application;
 using Application.Common.Models;
 using Infrastructure;
+using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
-using Application;
 //var builder = WebApplication.CreateBuilder(args);
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,6 +39,13 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.Migrate();
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -56,3 +65,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+public partial class Program { }
