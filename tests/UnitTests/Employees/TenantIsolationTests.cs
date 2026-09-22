@@ -1,6 +1,9 @@
 ﻿using Application.Common.Exceptions;
 using Application.Employees.Commands;
+using Application.Employees.Commands.CreateEmployee;
 using Application.Employees.Queries;
+using Application.Employees.Queries.GetEmployeeById;
+using Application.Employees.Queries.ListEmployee;
 using FluentAssertions;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;

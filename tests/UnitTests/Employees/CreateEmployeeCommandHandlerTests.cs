@@ -1,5 +1,6 @@
 ﻿using Application.Common.Exceptions;
 using Application.Employees.Commands;
+using Application.Employees.Commands.CreateEmployee;
 using Domain.Enums;
 using FluentAssertions;
 using Infrastructure.Persistence;
