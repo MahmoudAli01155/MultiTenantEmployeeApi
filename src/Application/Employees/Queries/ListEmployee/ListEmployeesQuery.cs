@@ -1,14 +1,6 @@
-﻿using Application.Common.Interfaces;
-using Application.Common.Models;
+﻿using Application.Common.Models;
 using Domain.Enums;
-using FluentValidation;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Employees.Queries.ListEmployee
 {
@@ -20,7 +12,7 @@ namespace Application.Employees.Queries.ListEmployee
         public EmployeeStatus? Status { get; init; }
     }
 
-    
 
-   
+
+
 }

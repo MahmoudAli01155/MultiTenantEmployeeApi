@@ -1,4 +1,5 @@
 using Api.Middleware;
+using Api.Swagger;
 using Application;
 using Application.Common.Models;
 using Infrastructure;
@@ -6,15 +7,10 @@ using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
-//var builder = WebApplication.CreateBuilder(args);
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 builder.Services.AddApplication();
-
-
-// Add services to the container.
 builder.Services.AddInfrastructure(builder.Configuration.GetConnectionString("Default")!);
 
 builder.Services.AddControllers()
@@ -32,13 +28,13 @@ builder.Services.AddControllers()
         };
     });
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.OperationFilter<TenantHeaderOperationFilter>();
+});
 
 var app = builder.Build();
-
 
 using (var scope = app.Services.CreateScope())
 {
@@ -46,25 +42,18 @@ using (var scope = app.Services.CreateScope())
     db.Database.Migrate();
 }
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-
 app.UseMiddleware<ExceptionHandlingMiddleware>();
-
 app.UseHttpsRedirection();
-
 app.UseMiddleware<TenantResolutionMiddleware>();
-
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();
-
 
 public partial class Program { }

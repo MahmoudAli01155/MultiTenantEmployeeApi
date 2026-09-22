@@ -2,15 +2,9 @@
 using Application.Common.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Employees.Queries.GetEmployeeById
 {
-    public record GetEmployeeByIdQuery(Guid Id) : IRequest<EmployeeDto>;
 
     public class GetEmployeeByIdQueryHandler : IRequestHandler<GetEmployeeByIdQuery, EmployeeDto>
     {
