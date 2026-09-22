@@ -1,7 +1,10 @@
 ﻿using Application.Common.Models;
 using Application.Employees;
 using Application.Employees.Commands;
+using Application.Employees.Commands.CreateEmployee;
+using Application.Employees.Commands.UpdateEmployeeCommand;
 using Application.Employees.Queries;
+using Application.Employees.Queries.ListEmployee;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

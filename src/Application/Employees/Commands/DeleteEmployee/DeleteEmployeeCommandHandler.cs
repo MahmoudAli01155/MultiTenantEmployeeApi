@@ -8,9 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Employees.Commands
+namespace Application.Employees.Commands.DeleteEmployee
 {
-    public record DeleteEmployeeCommand(Guid Id) : IRequest;
 
     public class DeleteEmployeeCommandHandler : IRequestHandler<DeleteEmployeeCommand>
     {

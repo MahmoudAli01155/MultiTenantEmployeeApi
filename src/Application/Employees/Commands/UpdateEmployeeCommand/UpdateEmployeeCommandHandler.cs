@@ -1,36 +1,15 @@
 ﻿using Application.Common.Exceptions;
 using Application.Common.Interfaces;
-using Application.Employees.Validators;
-using Domain.Enums;
-using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Application.Employees.Commands
+namespace Application.Employees.Commands.UpdateEmployeeCommand
 {
-    public record UpdateEmployeeCommand(
-Guid Id,
-string FirstName,
-string LastName,
-string Email,
-string Department,
-EmployeeStatus? Status,
-JsonElement? CustomData) : IRequest<EmployeeDto>, IEmployeeInput;
-
-    public class UpdateEmployeeCommandValidator : EmployeeInputValidator<UpdateEmployeeCommand>
-    {
-        public UpdateEmployeeCommandValidator()
-        {
-            RuleFor(x => x.Status).NotNull();
-        }
-    }
-
     public class UpdateEmployeeCommandHandler : IRequestHandler<UpdateEmployeeCommand, EmployeeDto>
     {
         private readonly IApplicationDbContext _db;

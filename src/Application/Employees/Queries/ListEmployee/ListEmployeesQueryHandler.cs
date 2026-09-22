@@ -1,7 +1,5 @@
 ﻿using Application.Common.Interfaces;
 using Application.Common.Models;
-using Domain.Enums;
-using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,26 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Employees.Queries
+namespace Application.Employees.Queries.ListEmployee
 {
-    public record ListEmployeesQuery : IRequest<PagedResult<EmployeeDto>>
-    {
-        public int Page { get; init; } = 1;
-        public int PageSize { get; init; } = 20;
-        public string? Department { get; init; }
-        public EmployeeStatus? Status { get; init; }
-    }
-
-    public class ListEmployeesQueryValidator : AbstractValidator<ListEmployeesQuery>
-    {
-        public ListEmployeesQueryValidator()
-        {
-            RuleFor(x => x.Page).GreaterThanOrEqualTo(1);
-            RuleFor(x => x.PageSize).InclusiveBetween(1, 100);
-            RuleFor(x => x.Status).IsInEnum().When(x => x.Status.HasValue);
-        }
-    }
-
     public class ListEmployeesQueryHandler : IRequestHandler<ListEmployeesQuery, PagedResult<EmployeeDto>>
     {
         private readonly IApplicationDbContext _db;
